@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Band Up IELTS</title>
+<meta name="description" content="Fun, colourful IELTS practice: Listening, Reading, Writing, Speaking and Band 6–9 vocabulary with Bangla help.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#home" aria-label="Band Up home">
+    <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" style="fill:var(--brand)"/><rect x="7" y="24" width="5" height="9" rx="2" style="fill:var(--b6)"/><rect x="14" y="19" width="5" height="14" rx="2" style="fill:var(--b7)"/><rect x="21" y="13" width="5" height="20" rx="2" style="fill:var(--b8)"/><rect x="28" y="7" width="5" height="26" rx="2" style="fill:var(--b9)"/></svg>
+    <span><b>Band Up</b><small>IELTS practice</small></span>
+  </a>
+  <div class="topstats" id="topstats"></div>
+  <button class="iconbtn" id="bnBtn" aria-label="Show or hide Bangla help" style="font-family:var(--bn);font-weight:700;font-size:15px">বাং</button>
+  <button class="iconbtn" id="soundBtn" aria-label="Sound effects"></button>
+  <button class="iconbtn" id="themeBtn" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg></button>
+</header>
+<div class="shell">
+  <aside class="rail" aria-label="Sections">
+    <nav class="nav" id="nav"></nav>
+    <div class="rail-card" id="railLevel"></div>
+  </aside>
+  <main id="main" tabindex="-1"></main>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Sections"></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script src="js/data/vocab.js"></script>
+<script src="js/data/listening.js"></script>
+<script src="js/data/reading.js"></script>
+<script src="js/data/writing.js"></script>
+<script src="js/data/speaking.js"></script>
+<script src="js/data/tips.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
