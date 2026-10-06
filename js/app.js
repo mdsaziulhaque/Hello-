@@ -240,6 +240,8 @@ function dial(lvl) {
 const PASSAGE_ART = {
   jute: `<svg viewBox="0 0 600 120" role="img" aria-label="Jute plants growing by water"><rect width="600" height="120" style="fill:var(--read-soft)"/><rect y="88" width="600" height="32" style="fill:var(--listen);opacity:.35"/>${Array.from({ length: 22 }, (_, i) => { const x = 20 + i * 27, h = 50 + (i * 37) % 30; return `<path d="M${x} 92 V${92 - h}" style="stroke:var(--tips)" stroke-width="3"/><ellipse cx="${x + 7}" cy="${98 - h}" rx="8" ry="3.5" style="fill:var(--tips)" transform="rotate(-30 ${x + 7} ${98 - h})"/><ellipse cx="${x - 7}" cy="${108 - h}" rx="8" ry="3.5" style="fill:var(--tips)" transform="rotate(30 ${x - 7} ${108 - h})"/>`; }).join("")}<circle cx="540" cy="30" r="16" style="fill:var(--gold)"/></svg>`,
   sleep: `<svg viewBox="0 0 600 120" role="img" aria-label="A moon and stars over a sleeping mind"><rect width="600" height="120" style="fill:var(--brand)"/>${Array.from({ length: 30 }, (_, i) => `<circle cx="${(i * 97) % 600}" cy="${(i * 53) % 110 + 5}" r="${i % 3 + 1}" fill="#fff" opacity=".7"/>`).join("")}<circle cx="480" cy="58" r="30" style="fill:var(--gold)"/><circle cx="494" cy="48" r="28" style="fill:var(--brand)"/><text x="60" y="76" font-family="Baloo 2, sans-serif" font-size="42" font-weight="800" fill="#fff" opacity=".9">z Z z</text></svg>`,
+  ocean: `<svg viewBox="0 0 600 120" role="img" aria-label="A double-hulled canoe under the stars"><rect width="600" height="120" style="fill:var(--brand)"/>${Array.from({ length: 26 }, (_, i) => `<circle cx="${(i * 89) % 600}" cy="${(i * 37) % 60 + 6}" r="${i % 3 ? 1.2 : 2}" fill="#fff" opacity=".8"/>`).join("")}<path d="M0 88 Q50 78 100 88 T200 88 T300 88 T400 88 T500 88 T600 88 V120 H0Z" style="fill:var(--listen)"/><path d="M0 100 Q50 92 100 100 T200 100 T300 100 T400 100 T500 100 T600 100 V120 H0Z" style="fill:var(--read)" opacity=".7"/><path d="M250 84 h90 l-10 8 h-70z M250 76 h90 l-10 8 h-70z" style="fill:var(--speak)"/><path d="M295 76 V30 L325 70 Z" fill="#fff" opacity=".9"/></svg>`,
+  bees: `<svg viewBox="0 0 600 120" role="img" aria-label="Honeycomb and a bee's waggle dance path"><rect width="600" height="120" style="fill:var(--speak-soft)"/>${Array.from({ length: 24 }, (_, i) => { const c = i % 8, r = Math.floor(i / 8), x = 30 + c * 44 + (r % 2) * 22, y = 22 + r * 38; return `<path d="M${x} ${y - 20} l17 10 v20 l-17 10 l-17 -10 v-20z" style="fill:none;stroke:var(--speak)" stroke-width="3"/>`; }).join("")}<path d="M430 95 C400 60 400 30 460 30 M460 30 l12 -6 l12 6 l12 -6 l12 6 l12 -6 l12 6 M532 30 C580 30 580 60 550 95" style="fill:none;stroke:var(--ink-faint)" stroke-width="2.5" stroke-dasharray="5 5"/><ellipse cx="496" cy="27" rx="13" ry="8" style="fill:var(--gold)"/><path d="M490 20v14M498 20v14" style="stroke:var(--ink)" stroke-width="3"/><ellipse cx="494" cy="17" rx="7" ry="5" fill="#fff" opacity=".8"/></svg>`,
   farm: `<svg viewBox="0 0 600 120" role="img" aria-label="Shelves of plants under LED lights"><rect width="600" height="120" style="fill:var(--surface-2)"/>${[0, 1, 2].map(r => `<rect x="40" y="${16 + r * 34}" width="520" height="4" rx="2" style="fill:var(--vocab)" opacity=".8"/><rect x="40" y="${42 + r * 34}" width="520" height="5" rx="2" style="fill:var(--ink-faint)"/>${Array.from({ length: 20 }, (_, i) => `<circle cx="${56 + i * 26}" cy="${36 + r * 34}" r="7" style="fill:var(--tips)"/>`).join("")}`).join("")}</svg>`
 };
 
@@ -247,7 +249,7 @@ const PASSAGE_ART = {
 const SECTIONS = [
   { id: "home", name: "Home", sub: "Your dashboard", k: "home" },
   { id: "listening", name: "Listening", sub: "4 parts · drills", k: "listen" },
-  { id: "reading", name: "Reading", sub: "3 passages", k: "read" },
+  { id: "reading", name: "Reading", sub: "Lessons · 5 passages", k: "read" },
   { id: "writing", name: "Writing", sub: "Task 1 & Task 2", k: "write" },
   { id: "speaking", name: "Speaking", sub: "Parts 1–3", k: "speak" },
   { id: "vocab", name: "Vocabulary", sub: "Band 6 → 9", k: "vocab" },
@@ -389,7 +391,7 @@ function renderHome(main) {
   const goalPct = Math.min(100, Math.round((S.day.d === todayStr() ? S.day.xp : 0) / S.goal * 100));
   const tiles = [
     ["listening", "listen", "Listening", "Four parts spoken aloud, plus number and spelling drills.", doneL / LISTENING.length, `${doneL}/${LISTENING.length} parts`],
-    ["reading", "read", "Reading", "Timed passages with TRUE/FALSE/NOT GIVEN, headings and more.", doneR / READING.length, `${doneR}/${READING.length} passages`],
+    ["reading", "read", "Reading", "Lessons on all 11 question types, timed passages and a scan race.", doneR / READING.length, `${doneR}/${READING.length} passages`],
     ["writing", "write", "Writing", "Charts, model essays and a smart editor that checks your words.", Math.min(1, S.stats.essays / 10), `${S.stats.essays} essays written`],
     ["speaking", "speak", "Speaking", "Examiner questions, cue-card timers and pronunciation games.", Math.min(1, S.stats.cards / 10), `${S.stats.cards} talks done`],
     ["vocab", "vocab", "Vocabulary", "Climb from Band 6 to Band 9 words with flashcards and games.", known / WORDS.length, `${known}/${WORDS.length} words known`],
@@ -642,9 +644,11 @@ function tipList(el, list, k) {
 
 /* ================= READING ================= */
 function renderReading(main) {
-  sectionPage(main, "reading", "Read smarter, not slower", "Three Academic-style passages with a 20-minute timer each. Select any text in a passage to highlight it.",
-    "প্রতিটি passage-এ ২০ মিনিট। passage-এর যেকোনো অংশ সিলেক্ট করলে হাইলাইট হবে।", [
+  sectionPage(main, "reading", "Read smarter, not slower", "Learn how IELTS Reading works and how to beat each question type, then practise on five timed passages. Select any text in a passage to highlight it.",
+    "প্রথমে কৌশল শিখুন, তারপর ঘড়ি ধরে ৫টি passage অনুশীলন করুন। passage-এর যেকোনো অংশ সিলেক্ট করলে হাইলাইট হবে।", [
+    ["learn", "Learn", readLearn],
     ["passages", "Passages", readList],
+    ["scan", "Scan race", scanRace],
     ["tfng", "TRUE/FALSE/NOT GIVEN trainer", tfngTrainer],
     ["tips", "Strategies", el => tipList(el, READ_TIPS, "read")]
   ]);
@@ -652,7 +656,7 @@ function renderReading(main) {
 function readList(el) {
   el.innerHTML = `<div class="grid g3">${READING.map(p => {
     const n = p.groups.reduce((a, g) => a + g.items.length, 0), best = S.done[p.id];
-    return `<div class="card stack k-read" style="padding:0;overflow:hidden"><div style="height:90px;overflow:hidden">${PASSAGE_ART[p.art]}</div><div class="stack" style="padding:0 18px 18px"><div class="row"><span class="label">${n} questions · ${p.minutes} min</span>${best != null ? `<span class="bandchip b7" style="margin-left:auto">Best ${best}/${n}</span>` : ""}</div><h3>${esc(p.title)}</h3><p class="muted">${esc(p.sub)}</p><p class="faint" style="font-size:13px">${p.groups.map(g => g.title.split("·")[1].trim()).join(" · ")}</p><button class="btn" data-open="${p.id}">${I.read} Start reading</button></div></div>`;
+    return `<div class="card stack k-read" style="padding:0;overflow:hidden"><div style="height:90px;overflow:hidden">${PASSAGE_ART[p.art]}</div><div class="stack" style="padding:0 18px 18px"><div class="row"><span class="label">${n} questions · ${p.minutes} min</span>${best != null ? `<span class="bandchip b7" style="margin-left:auto">Best ${best}/${n}</span>` : ""}</div><h3>${esc(p.title)}</h3><p class="muted">${esc(p.sub)}</p>${p.source ? `<p style="font-size:13px;font-weight:700;color:var(--read)">${esc(p.source)}</p>` : ""}<p class="faint" style="font-size:13px">${p.groups.map(g => g.title.split("·")[1].trim()).join(" · ")}</p><button class="btn" data-open="${p.id}">${I.read} Start reading</button></div></div>`;
   }).join("")}</div>`;
   $$("[data-open]", el).forEach(b => b.addEventListener("click", () => readPassage(el, READING.find(p => p.id === b.dataset.open))));
 }
@@ -699,6 +703,106 @@ function readPassage(el, p) {
     $("#rCheck").hidden = true; $("#rRetry").hidden = false;
   });
   $("#rRetry").addEventListener("click", () => readPassage(el, p));
+}
+function readLearn(el) {
+  const total = READ_TIME.reduce((a, t) => a + t[1], 0), cols = ["var(--tips)", "var(--read)", "var(--write)", "var(--ink-faint)"];
+  const ros = ROSETTA, uid = "ros";
+  el.innerHTML = `
+  <div class="card stack k-read"><span class="label">Lesson 1 · The 60-minute plan</span><h3>The clock is the real enemy, not the English.</h3>
+    <p class="muted">3 passages, 40 questions, about 2,150–2,750 words. Every question is worth one mark, so don't let the easy passage steal time from the hard one.</p>
+    <div class="timeplan" role="img" aria-label="Time plan: Passage 1 16 minutes, Passage 2 19 minutes, Passage 3 22 minutes, checking 3 minutes">${READ_TIME.map((t, i) => `<div style="flex:${t[1]};background:${cols[i]}"><b>${t[1]} min</b><span>${esc(t[0])}</span></div>`).join("")}</div>
+    <div class="grid g3">${READ_TIME.slice(0, 3).map(t => `<p class="muted" style="font-size:14px"><b>${esc(t[0])}:</b> ${esc(t[2])}</p>`).join("")}</div>
+    <div class="fb no"><b>Costly trap:</b> Reading has no extra transfer time. Copy answers to the answer sheet after each passage, inside the 60 minutes.</div>
+    <p class="bn bn-tip">Reading-এ আলাদা transfer time নেই — প্রতিটি passage শেষ করেই উত্তর answer sheet-এ তুলুন।</p></div>
+
+  <div class="card stack k-read"><span class="label">Lesson 2 · Three reading speeds</span><h3>Good readers change gear.</h3>
+    <div class="grid g3">${READ_SPEEDS.map((r, i) => `<div class="card flat stack" style="border-top:5px solid ${["var(--tips)", "var(--read)", "var(--write)"][i]}"><div class="row"><h3>${esc(r[0])}</h3><span class="pill" style="margin-left:auto">${esc(r[3])}</span></div><p>${esc(r[1])}</p><p class="muted" style="font-size:14px"><b>When:</b> ${esc(r[2])}</p><p class="bn bn-tip" style="font-size:14.5px">${esc(r[4])}</p></div>`).join("")}</div>
+    <div class="card tint flat"><p><b>Paragraph map:</b> while skimming, write two or three words next to each paragraph saying what it is about ("computer model", "1976 voyage"). When a question asks about a topic, you'll know where to look.</p></div>
+    <a class="btn" href="#reading-scan" style="align-self:flex-start">${I.play} Practise scanning: Scan race</a></div>
+
+  <div class="card stack k-read"><span class="label">Lesson 3 · The 11 question types</span><h3>Know which answers come in order.</h3>
+    <div class="grid g2">
+      <div class="card flat stack"><span class="label" style="--c:var(--good)">Answers follow the passage order</span><div class="row">${READ_TYPES.filter(t => t[1]).map(t => `<span class="pill">${esc(t[0])}</span>`).join("")}</div><p class="muted" style="font-size:14px">Found answer 5? Answer 6 is below it. Don't search above.</p></div>
+      <div class="card flat stack"><span class="label" style="--c:var(--bad)">Answers are spread everywhere</span><div class="row">${READ_TYPES.filter(t => !t[1]).map(t => `<span class="pill">${esc(t[0])}</span>`).join("")}</div><p class="muted" style="font-size:14px">These take the longest. Do them last in each passage.</p></div>
+    </div>
+    <div class="stack" style="gap:8px">${READ_TYPES.map((t, i) => `<details class="more"><summary><span class="qn" style="margin:0">${i + 1}</span> ${esc(t[0])} <span class="bandchip ${t[1] ? "b7" : "b9"}" style="margin-left:auto">${t[1] ? "in order" : "any order"}</span></summary><div class="stack" style="gap:8px"><ol class="dots">${t[2].map(x => `<li>${esc(x)}</li>`).join("")}</ol><div class="fb no"><b>Trap:</b> ${esc(t[3])}</div><p class="bn bn-tip" style="font-size:14.5px">${esc(t[4])}</p></div></details>`).join("")}</div></div>
+
+  <div class="card stack k-read"><span class="label">Lesson 4 · FALSE or NOT GIVEN?</span><h3>One question decides it.</h3>
+    <div class="grid g3">
+      <div class="card flat"><span class="bandchip b7">TRUE</span><p style="margin-top:6px">The text says the same thing in other words.</p></div>
+      <div class="card flat"><span class="bandchip b9">FALSE</span><p style="margin-top:6px">The text says the opposite. You can point to the sentence.</p></div>
+      <div class="card flat"><span class="bandchip b6">NOT GIVEN</span><p style="margin-top:6px">The text is silent. You feel it's wrong, but can't point to anything.</p></div>
+    </div>
+    <div class="card tint flat"><p><b>Ask yourself:</b> “Does the text say something that proves this statement wrong?” If yes, it's FALSE. If you can't put your finger on a sentence, it's NOT GIVEN. Your own knowledge doesn't count.</p><p class="bn bn-tip">যে বাক্য থেকে উত্তর আসছে তাতে আঙুল রাখতে না পারলে উত্তর NOT GIVEN।</p></div>
+    <h4>Try it · 8 statements about the Rosetta Stone</h4>
+    <div class="card flat" style="background:var(--surface-2);border:0"><p style="line-height:1.75">${esc(ros.text)}</p></div>
+    <div class="stack" id="rosQs">${ros.items.map((it, i) => qHTML({ ...it, t: "tfng" }, i + 1, uid)).join("")}</div>
+    <div class="row"><button class="btn" id="rosCheck">${I.check} Check answers</button></div><div id="rosOut"></div></div>
+
+  <div class="grid g2">
+    <div class="card k-read"><span class="label">Lesson 5 · Four habits that raise your band</span>${READ_HABITS.map((h, i) => `<div class="tip"><span class="n">${i + 1}</span><div><h4>${esc(h[0])}</h4><p class="muted">${esc(h[1])}</p><p class="bn bn-tip">${esc(h[2])}</p></div></div>`).join("")}</div>
+    <div class="stack">
+      <div class="card stack k-read"><span class="label">Paraphrase notebook · examples</span><div class="tbl"><table><thead><tr><th>Passage says</th><th>Question says</th></tr></thead><tbody>${PARAPHRASES.map(r => `<tr><td>${esc(r[0])}</td><td class="good-c">${esc(r[1])}</td></tr>`).join("")}</tbody></table></div></div>
+      <div class="card stack k-read"><span class="label">Read every day · free sites</span><ul class="clean">${READ_SOURCES.map(r => `<li><a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b></a><br><span class="muted" style="font-size:14px">${esc(r[1])}</span></li>`).join("")}</ul></div>
+    </div>
+  </div>
+  <div class="card stack k-read"><span class="label">Check yourself after a 13-question passage</span><div class="tbl"><table><thead><tr><th>Score</th><th>Where you are</th><th>Next step</th></tr></thead><tbody>
+    <tr><td><b>11–13</b></td><td>Band 7.5 pace</td><td>Keep timing yourself on Passage 3 texts.</td></tr>
+    <tr><td><b>9–10</b></td><td>Band 6.5–7.0</td><td>Good base. Work on the traps in your error log.</td></tr>
+    <tr><td><b>7–8</b></td><td>Band 6.0</td><td>Practise matching headings and NOT GIVEN separately.</td></tr>
+    <tr><td><b>6 or less</b></td><td>Below 6</td><td>Build vocabulary first (Vocabulary section), then return to strategy.</td></tr></tbody></table></div>
+    <a class="btn" href="#reading-passages" style="align-self:flex-start">${I.read} Go to the passages</a></div>`;
+  bindOpts(el);
+  $("#rosCheck").addEventListener("click", ev => {
+    const btn = $("#rosCheck"); if (btn.disabled) return; btn.disabled = true;
+    let score = 0; ros.items.forEach((it, i) => { if (qCheck(el, { ...it, t: "tfng" }, i + 1, uid)) score++; });
+    Sound.play(score >= 6 ? "ok" : "no"); if (score === 8) { Confetti.burst(); award("perfect"); }
+    $("#rosOut").innerHTML = scoreBanner(score, 8, "Most people lose marks on 2, 4 and 7. Read those explanations twice.");
+    addXP(score * 2 + 5, ev);
+  });
+}
+function scanRace(el) {
+  const tok = w => w.replace(/^[^\w']+|[^\w%']+$/g, "").replace(/'s$/, "").toLowerCase();
+  const items = shuffle(SCAN_ITEMS).slice(0, 8);
+  let k = 0, score = 0, t0 = 0, times = [];
+  const intro = () => {
+    el.innerHTML = `<div class="card stack k-read" style="max-width:720px;width:100%;margin:0 auto"><span class="label">Scan race · 8 rounds</span><h3>Find it fast. Don't read — hunt.</h3>
+      <p class="muted">Each round shows one paragraph and tells you what to find: a year, a name, a number. Tap the word as quickly as you can. Good scanners take under 10 seconds.</p>
+      <p class="bn bn-tip">পুরো অনুচ্ছেদ পড়বেন না — চোখ দিয়ে শুধু সংখ্যা, নাম বা বড় হাতের অক্ষর খুঁজুন।</p>
+      <p class="faint" style="font-size:13.5px">Best average: ${S.best.scan ? S.best.scan.toFixed(1) + " s" : "—"}</p>
+      <button class="btn" id="scGo" style="align-self:flex-start">${I.play} Start</button></div>`;
+    $("#scGo").addEventListener("click", round);
+  };
+  const round = () => {
+    if (k >= items.length) {
+      const avg = times.reduce((a, b) => a + b, 0) / Math.max(1, times.length);
+      const best = score === items.length && (!S.best.scan || avg < S.best.scan); if (best) S.best.scan = avg; save();
+      if (score === items.length) { Confetti.burst(); Sound.play("done"); }
+      el.innerHTML = `<div class="card stack" style="max-width:720px;width:100%;margin:0 auto">${scoreBanner(score, items.length, `Average time ${avg.toFixed(1)} seconds per word.${best ? " New best! 🏆" : ""}`)}<button class="btn" id="scAgain">${I.refresh} Race again</button></div>`;
+      $("#scAgain").addEventListener("click", () => scanRace(el)); return;
+    }
+    const [pid, para, what, ans] = items[k], p = READING.find(r => r.id === pid), text = p.paras.find(x => x[0] === para)[1];
+    el.innerHTML = `<div class="card stack k-read" style="max-width:720px;width:100%;margin:0 auto">
+      <div class="row"><span class="label">Round ${k + 1}/${items.length} · ${esc(p.title)}, paragraph ${para}</span><span class="timer" id="scT" style="margin-left:auto;font-size:22px">0.0</span></div>
+      <div class="meter"><i style="width:${k / items.length * 100}%"></i></div>
+      <h3>Find: <span style="color:var(--read)">${esc(what)}</span></h3>
+      <p class="scanp">${text.split(/\s+/).map((w, i) => `<span data-w="${i}">${esc(w)}</span>`).join(" ")}</p><div id="scFb"></div></div>`;
+    t0 = Date.now();
+    const id = setInterval(() => { const t = $("#scT"); if (t) t.textContent = ((Date.now() - t0) / 1000).toFixed(1); else clearInterval(id); }, 100);
+    onLeave(() => clearInterval(id));
+    const words = text.split(/\s+/);
+    $$(".scanp span", el).forEach(sp => sp.addEventListener("click", ev => {
+      if ($(".scanp", el).dataset.done) return;
+      const ok = tok(words[+sp.dataset.w]) === ans.toLowerCase();
+      if (!ok) { sp.classList.add("miss"); Sound.play("no"); return; }
+      clearInterval(id); $(".scanp", el).dataset.done = 1;
+      const secs = (Date.now() - t0) / 1000; times.push(secs); score++;
+      sp.classList.add("hit"); Sound.play("ok"); addXP(secs < 10 ? 3 : 2, ev);
+      $("#scFb").innerHTML = `<div class="fb ok"><b>Found in ${secs.toFixed(1)} s!</b> ${secs < 10 ? "Great scanning." : "Try to look only for the kind of word you need."}</div><div class="row" style="margin-top:10px"><button class="btn" id="scNext">Next ${I.right}</button></div>`;
+      $("#scNext").addEventListener("click", () => { k++; round(); }); $("#scNext").focus();
+    }));
+  };
+  intro();
 }
 function tfngTrainer(el) {
   const items = shuffle(TFNG); let i = 0, score = 0;

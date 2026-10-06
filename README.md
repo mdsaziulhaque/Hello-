@@ -7,7 +7,7 @@ A colourful, game-style web app for IELTS preparation, with Bangla help for Bang
 | Section | What you can do |
 | --- | --- |
 | **Listening** | 4 test parts (form, map, multiple choice, lecture notes) read aloud by your browser's British voices. Practice or exam mode, speed control, transcript, explanations. Plus number and spelling dictation drills. |
-| **Reading** | 3 Academic passages (jute in Bangladesh, sleep and memory, vertical farming) with a 20-minute timer, text highlighter, and 6 question types. Plus a quick-fire TRUE / FALSE / NOT GIVEN trainer. |
+| **Reading** | Lessons: the 16/19/22-minute plan, skim–scan–close reading, a guide to all 11 question types, FALSE vs NOT GIVEN (with the Rosetta Stone exercise), daily reading habits and sites. 5 timed passages (jute, sleep, vertical farming, honeybees, and "Reading the Ocean" from Band 9 Bangladesh) with a highlighter. Plus a Scan race game and a TRUE / FALSE / NOT GIVEN trainer. |
 | **Writing** | Task 1 charts (line, bar, pie, process, map) with Band 8 models, Task 2 model essays, a Band 6 vs Band 8 comparison, linking words, and a timed editor that counts words and flags weak words. |
 | **Speaking** | Part 1 examiner questions, Part 2 cue cards with a 1-minute prep and 2-minute talk timer, Part 3 discussion, recording with live transcript (Chrome), a sound game for /v/–/b/, /θ/–/t/ and other Bangla-speaker pairs, and band descriptors. |
 | **Vocabulary** | 120 words in four decks (Band 6, 7, 8, 9) with pictures, Bangla meanings, examples and pronunciation. Band ladders show one idea at Band 6 → 9. Flashcards, quiz, match game, word lists and collocations. |

@@ -460,3 +460,18 @@ ul.dots li{margin-bottom:4px}
   .pill{font-size:13px;padding:4px 9px}
   .iconbtn{width:34px;height:34px}
 }
+
+/* reading lessons */
+.timeplan{display:flex;gap:4px;border-radius:14px;overflow:hidden;min-height:64px}
+.timeplan>div{display:flex;flex-direction:column;justify-content:center;padding:8px 10px;color:#fff;min-width:56px}
+.timeplan b{font-family:var(--display);font-size:20px;line-height:1.1;white-space:nowrap}
+.timeplan span{font-size:12px;font-weight:700;opacity:.92;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:root[data-theme="dark"] .timeplan>div{color:#12142B}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .timeplan>div{color:#12142B}}
+details.more>summary .qn{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:8px;background:var(--cs,var(--surface-2));font-size:13px}
+.scanp{font-size:17px;line-height:2;user-select:none}
+.scanp span{cursor:pointer;border-radius:5px;padding:1px 2px}
+.scanp span:hover{background:var(--read-soft)}
+.scanp span.miss{background:var(--bad-soft);text-decoration:line-through}
+.scanp span.hit{background:var(--good);color:#fff;font-weight:800}
+@media (max-width:560px){.timeplan{display:grid;grid-template-columns:1fr 1fr}.timeplan>div{flex:none!important}}
